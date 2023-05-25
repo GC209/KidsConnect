@@ -1,5 +1,7 @@
+//Base component with link to the overview pages
+
 import { useState } from 'react'
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 
 import { StyledLink, HorizontalSeparater, BtnContainer } from './App.styles';
 

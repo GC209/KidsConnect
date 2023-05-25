@@ -1,3 +1,10 @@
+/*Component to show MUI card of session with details :
+- The start and end times for this session.
+- The name and avatar for the child
+- The group name associated with that session
+- The current presence status for that session
+*/
+
 import { useState } from 'react';
 import { useQuery } from 'react-query';
 import Card from '@mui/material/Card';
@@ -13,6 +20,8 @@ function BasicCard({ session}) {
   
   const [presence, setPresence] = useState(session.presence);
   const [btnLabel, setBtnLabel] = useState('present');
+  
+  /*React-query and axios to get the children details */
   const { data, isError, error } = useQuery('child', () => {
     return axios.get('http://localhost:3001/children/')
   })
@@ -24,8 +33,15 @@ function BasicCard({ session}) {
       console.log('Unexpected error', error);
     }
   }
+
+  /*filter to get the child details based on the child id recieved in the session*/
   const child = data?.data.filter(record => record.id === session.child_id)
   
+  /*A button event that updates the presence status according to the following rules. Make sure the button shows a useful label.
+  - If the presence status is ‘unknown’ it becomes ‘present’.
+  - If the presence status is ‘present’ it becomes ‘picked up’
+  - If the presence status is ‘picked up’ it becomes unknown’ again.
+  */
   const handleClick = (e) => {
     e.preventDefault();
     setPresence(btnLabel);

@@ -1,3 +1,7 @@
+/*This form on submit POST a news item, that is immediately visible in on the overview.
+The form is made using react-hook-form
+*/
+
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,6 +12,7 @@ export default function NewsForm() {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
 
+  /*Logic to post the form details to the db.json*/
   const submitData = (data) => {
     axios.post('http://localhost:3001/news/', data)
   .then(function (response) {

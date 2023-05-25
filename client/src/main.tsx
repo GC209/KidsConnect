@@ -1,3 +1,4 @@
+//Main component to render App component to the root and setting up the routing using react-router-dom
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';

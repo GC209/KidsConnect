@@ -1,4 +1,5 @@
-export const getRequestedDay =(date, type) =>  {
+/*Function to return the previous or next day based on date(current date) & type(previos or next)*/
+export const getRequestedDay = (date, type) => {
     const curr = new Date(date.getTime());
     if (type === "prev") {
       curr.setDate(date.getDate() - 1);

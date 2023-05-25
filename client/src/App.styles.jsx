@@ -1,3 +1,5 @@
+//Styled components for link, buttons
+
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
