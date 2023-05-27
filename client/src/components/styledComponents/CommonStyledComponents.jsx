@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom';
 
+
 export const StyledLink = styled(Link)`
   display: inline-flex;
   align-items: center;
@@ -52,3 +53,9 @@ export const DatePickerDialog = styled.div`
   text-align: center;
   margin: auto;
 `
+
+export const StyledSessionCard = styled.div`
+  border: 1px solid;
+  width: 500px;
+  margin: 20px 10px;
+`;

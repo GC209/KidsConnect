@@ -14,9 +14,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar/Avatar';
 import axios from 'axios';
+import { StyledSessionCard } from '../styledComponents/CommonStyledComponents';
 
 
-function BasicCard({ session}) {
+function SessionCard({ session}) {
   
   const [presence, setPresence] = useState(session.presence);
   const [btnLabel, setBtnLabel] = useState('present');
@@ -55,39 +56,41 @@ function BasicCard({ session}) {
   }
 
   return (
-    <Card sx={{ minWidth: 275 }}>
-      <CardContent>
-        <Typography variant="h5" component="div">
-          {session.product_name}
-        </Typography>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Start Time : {session.start_time}
-        </Typography>
-        <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Start Time : {session.end_time}
-        </Typography>
-        
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Child name : {child && child[0].name}
-        </Typography>
-        
-        <Avatar
-          alt={child && child[0].name}
-          src={child && child[0].avatar}
-          sx={{ width: 56, height: 56 }}
-        />
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          {session.group.name}
-        </Typography>
-        <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          Presence : {presence}
-        </Typography>
-        <CardActions>
-          <Button onClick={handleClick} size="small">Change status to { btnLabel}</Button>
-        </CardActions>
-      </CardContent>
-    </Card>
+    <StyledSessionCard>
+      <Card sx={{ minWidth: 275 }}>
+        <CardContent>
+          <Typography variant="h5" component="div">
+            {session.product_name}
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            Start Time : {session.start_time}
+          </Typography>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            Start Time : {session.end_time}
+          </Typography>
+          
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Child name : {child && child[0].name}
+          </Typography>
+          
+          <Avatar
+            alt={child && child[0].name}
+            src={child && child[0].avatar}
+            sx={{ width: 56, height: 56 }}
+          />
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            {session.group.name}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            Presence : {presence}
+          </Typography>
+          <CardActions>
+            <Button onClick={handleClick} size="small">Change status to { btnLabel}</Button>
+          </CardActions>
+        </CardContent>
+      </Card>
+    </StyledSessionCard>
   );
 }
 
-export default BasicCard;
+export default SessionCard;

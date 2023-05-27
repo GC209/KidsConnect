@@ -10,8 +10,9 @@ import { useParams } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import { Button } from "@mui/material";
 import { getRequestedDay } from "../../custom/getRequestedDay";
-import BasicCard from "../../customMUIElements/card/BasicCard";
-import SelectGroup from "../../customMUIElements/selectOptions/SelectGroup";
+
+import SessionGroupOptions from "../../components/sessionGroupOptions/SessionGroupOptions";
+import SessionCard from "../../components/sessionCard/SessionCard";
 import { StyledLink, HorizontalSeparater } from '../../components/styledComponents/CommonStyledComponents';
 
 interface group{
@@ -32,8 +33,11 @@ interface session{
 
 
 const SessionOverview = (): React.JSX.Element => {
+  const params = useParams();
+  //console.log(params.sessionDate);
+  
   //state to maintain the current selected datw
-  const [currentDate, setCurrentDate] = useState<string>("2023-06-02");
+  const [currentDate, setCurrentDate] = useState<string| undefined>(params.sessionDate);
   
   //state to keep unique groups available on a specific day
   const [uniqueGroups, setUniqueGroups] = useState<string[]>([]);
@@ -44,13 +48,12 @@ const SessionOverview = (): React.JSX.Element => {
   //state to keep the selected group from the options dropdown
   const [filteredGroup, setFilteredGroup] = useState('');
 
-  const params = useParams();
-  console.log(params.sessionDate);
+  
   
   //Side effect that runs on initial render and on any date change to fetch the sessions for a specific day
   useEffect(() => {
-    axios.get('http://localhost:3001/sessions').then(res => {
-      setSessions(res.data.filter(record => record.day === currentDate));
+    axios.get(`http://localhost:3001/sessions?day=${currentDate}`).then(res => {
+      setSessions(res.data);
     });
   }, [currentDate])
   
@@ -63,7 +66,7 @@ const SessionOverview = (): React.JSX.Element => {
   //event to set the current date based on the button clicked for previous or next date
   const handleDate = (e) => {
     e.preventDefault();
-    setCurrentDate(() => getRequestedDay(new Date(currentDate), e.currentTarget.name));
+    setCurrentDate(() => getRequestedDay(currentDate && new Date(currentDate), e.currentTarget.name));
   }
 
   //event to set the selected group based on group selected in the Options dropdown
@@ -88,11 +91,12 @@ const SessionOverview = (): React.JSX.Element => {
       
       <HorizontalSeparater />
       
-      {uniqueGroups.length && <SelectGroup groups={uniqueGroups} callback={handleSelect} />}
-      <HorizontalSeparater />
+      {uniqueGroups.length > 0 && <SessionGroupOptions groups={uniqueGroups} callback={handleSelect} />}
+
+      {uniqueGroups.length > 0 && <HorizontalSeparater />}
       {!sessions.length && <h3>Sorry, no sessions available on the selected date</h3>}
-      {!filteredGroup && sessions && sessions.map(session => <BasicCard key={session.id} session={session} />)}
-      {filteredGroup && sessions && sessions.map(session => (session.group.name) === filteredGroup && <BasicCard key={session.id} session={session} />)}
+      {!filteredGroup && sessions && sessions.map(session => <SessionCard key={session.id} session={session} />)}
+      {filteredGroup && sessions && sessions.map(session => (session.group.name) === filteredGroup && <SessionCard key={session.id} session={session} />)}
       
     </>
   )

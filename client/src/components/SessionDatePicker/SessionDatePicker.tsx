@@ -9,10 +9,13 @@ export default function SessionDatePicker({ handleDate }) {
 
   const [currDate, setCurrDate] = useState<Dayjs| any>(dayjs('2023-06-02'));
   useEffect(() => {
-    let { $D} = currDate;
-    const {$M, $y } = currDate
+    let { $D, $M} = currDate;
+    const { $y } = currDate
     if ($D < 10)
       $D = `0${$D}`;
+    $M++;
+    if ($M < 10)
+      $M = `0${$M}`;
     handleDate(`${$y}-${$M}-${$D}`);
   }, [currDate])
   return (

@@ -7,7 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
-export default function SelectGroup({ groups, callback}) {
+export default function SessionGroupOptions({ groups, callback}) {
   const [group, setGroup] = React.useState('');
   useEffect(() => {
     callback(group);
