@@ -5,7 +5,7 @@ The form is made using react-hook-form
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import { StyledLink, HorizontalSeparater } from '../../App.styles';
+import { StyledLink, HorizontalSeparater } from '../../components/styledComponents/CommonStyledComponents';
 import './styles.css';
 
 export default function NewsForm() {

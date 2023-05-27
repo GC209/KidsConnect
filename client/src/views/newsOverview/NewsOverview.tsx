@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 import NewsCard from "../../customMUIElements/newsCard/NewsCard";
-import { StyledLink, HorizontalSeparater } from '../../App.styles';
+import { StyledLink, HorizontalSeparater } from '../../components/styledComponents/CommonStyledComponents';
 
 interface ArticleType{
   id: number;

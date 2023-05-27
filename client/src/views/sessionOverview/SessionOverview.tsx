@@ -4,14 +4,15 @@ The sessions overview page/component by default shows all the sessions available
 //There are two buttons: ‘Next day’ and ‘Previous day’. When clicked it will show the sessions for that date.
 */
 import axios from "axios";
+import { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
+
 import Stack from '@mui/material/Stack';
 import { Button } from "@mui/material";
-import { useState, useEffect } from "react";
-
 import { getRequestedDay } from "../../custom/getRequestedDay";
 import BasicCard from "../../customMUIElements/card/BasicCard";
 import SelectGroup from "../../customMUIElements/selectOptions/SelectGroup";
-import { StyledLink, HorizontalSeparater } from '../../App.styles';
+import { StyledLink, HorizontalSeparater } from '../../components/styledComponents/CommonStyledComponents';
 
 interface group{
   id: number;
@@ -43,6 +44,9 @@ const SessionOverview = (): React.JSX.Element => {
   //state to keep the selected group from the options dropdown
   const [filteredGroup, setFilteredGroup] = useState('');
 
+  const params = useParams();
+  console.log(params.sessionDate);
+  
   //Side effect that runs on initial render and on any date change to fetch the sessions for a specific day
   useEffect(() => {
     axios.get('http://localhost:3001/sessions').then(res => {
