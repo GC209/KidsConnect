@@ -19,7 +19,10 @@ import { StyledSessionCard } from '../styledComponents/CommonStyledComponents';
 
 function SessionCard({ session}) {
   
+  //To maintain the state of the presence. Initially set to the presence value coming from the session
   const [presence, setPresence] = useState(session.presence);
+  
+  //state to maintain the button label which changes on click of the button
   const [btnLabel, setBtnLabel] = useState('present');
   
   /*React-query and axios to get the children details */
@@ -27,6 +30,7 @@ function SessionCard({ session}) {
     return axios.get('http://localhost:3001/children/')
   })
   
+  //To handle the error in response
   if (isError) {
     if (error instanceof Error) {
       return <h2>{error.message}</h2>

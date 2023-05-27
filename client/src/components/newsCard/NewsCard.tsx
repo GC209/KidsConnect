@@ -1,4 +1,9 @@
-/*Card to show the news information of the news item.*/
+/*
+Card to show the news information of the news item.
+MUI component is used for the cards here
+As a props it receives an object(article) containing title, author and content of the article
+*/
+
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';

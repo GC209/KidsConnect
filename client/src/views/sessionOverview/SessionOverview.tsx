@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 import Stack from '@mui/material/Stack';
 import { Button } from "@mui/material";
-import { getRequestedDay } from "../../custom/getRequestedDay";
+import { getRequestedDay } from "../../utils/getRequestedDay";
 
 import SessionGroupOptions from "../../components/sessionGroupOptions/SessionGroupOptions";
 import SessionCard from "../../components/sessionCard/SessionCard";

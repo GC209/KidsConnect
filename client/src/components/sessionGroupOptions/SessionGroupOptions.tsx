@@ -1,4 +1,7 @@
-/*Compent for unique session available on a specific day*/
+/*
+Compent for unique session available on a specific day
+MUI component is used in this component customization
+*/
 import * as React from 'react';
 import { useEffect } from 'react';
 import Box from '@mui/material/Box';
@@ -8,11 +11,16 @@ import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 export default function SessionGroupOptions({ groups, callback}) {
+  
+  //state to maintain the group selected
   const [group, setGroup] = React.useState('');
+  
+  //sideEffect to trigger the callback based on the group dependency change
   useEffect(() => {
     callback(group);
   }, [group])
 
+  //function to handle the group selected in the dropdown
   const handleChange = (event: SelectChangeEvent) => {
     setGroup(event.target.value as string);
     

@@ -1,4 +1,4 @@
-/*This form on submit POST a news item, that is immediately visible in on the overview.
+/*This form on submit POST a news item, that is immediately visible in on the news overview page.
 The form is made using react-hook-form
 */
 
@@ -10,6 +10,8 @@ import './styles.css';
 
 export default function NewsForm() {
   const { register, handleSubmit } = useForm();
+  
+  //to navigate to News Overview page
   const navigate = useNavigate();
 
   /*Logic to post the form details to the db.json*/

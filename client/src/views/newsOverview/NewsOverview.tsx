@@ -6,7 +6,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 
-import NewsCard from "../../customMUIElements/newsCard/NewsCard";
+import NewsCard from "../../components/newsCard/NewsCard";
 import { StyledLink, HorizontalSeparater } from '../../components/styledComponents/CommonStyledComponents';
 
 interface ArticleType{
@@ -25,7 +25,6 @@ const NewsOverview = () => {
     axios.get("http://localhost:3001/news/").then(res => {
       setArticles(() => res.data);
     })
-    console.log(articles);
   }, [])
   
   return (
