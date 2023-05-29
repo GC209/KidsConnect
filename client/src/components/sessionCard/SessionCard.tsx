@@ -15,19 +15,25 @@ import Typography from '@mui/material/Typography';
 import Avatar from '@mui/material/Avatar/Avatar';
 import axios from 'axios';
 import { StyledSessionCard } from '../styledComponents/CommonStyledComponents';
+import { PUBLIC_URL } from '../../utils/Constants.js';
+import { getButtonLabel } from '../../utils/getButtonLabel.js';
 
 
 function SessionCard({ session}) {
   
-  //To maintain the state of the presence. Initially set to the presence value coming from the session
-  const [presence, setPresence] = useState(session.presence);
+  //set the presence status in local storage to make it persist
+  if (!localStorage.getItem(`${session.id}`))
+    localStorage.setItem(`${session.id}`, session.presence)
+  
+  //To maintain the state of the presence. Initially set to the presence value coming from the localstorage
+  const [presence, setPresence] = useState(localStorage.getItem(`${session.id}`));
   
   //state to maintain the button label which changes on click of the button
-  const [btnLabel, setBtnLabel] = useState('present');
+  const [btnLabel, setBtnLabel] = useState(getButtonLabel(localStorage.getItem(`${session.id}`)));
   
   /*React-query and axios to get the children details */
   const { data, isError, error } = useQuery('child', () => {
-    return axios.get('http://localhost:3001/children/')
+    return axios.get(`${PUBLIC_URL}/children/`);
   })
   
   //To handle the error in response
@@ -42,21 +48,15 @@ function SessionCard({ session}) {
   /*filter to get the child details based on the child id recieved in the session*/
   const child = data?.data.filter(record => record.id === session.child_id)
   
-  /*A button event that updates the presence status according to the following rules. Make sure the button shows a useful label.
-  - If the presence status is ‘unknown’ it becomes ‘present’.
-  - If the presence status is ‘present’ it becomes ‘picked up’
-  - If the presence status is ‘picked up’ it becomes unknown’ again.
-  */
+  //function to change the status of the presence and btn label based on button clicked
   const handleClick = (e) => {
     e.preventDefault();
-    setPresence(btnLabel);
-    if (btnLabel === 'unknown') {
-      setBtnLabel('present');
-    } else if (btnLabel === 'present') {
-      setBtnLabel('picked up');
-    } else if (btnLabel === 'picked up') {
-      setBtnLabel('unknown')
-    }
+    if(btnLabel)
+      localStorage.setItem(`${session.id}`, btnLabel);
+    setPresence(btnLabel as string);
+    
+    
+    setBtnLabel(getButtonLabel(btnLabel) as string);
   }
 
   return (

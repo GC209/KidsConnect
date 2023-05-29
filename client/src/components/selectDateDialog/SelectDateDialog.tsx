@@ -16,10 +16,8 @@ import DialogContent from '@mui/material/DialogContent';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import { useNavigate } from "react-router-dom";
-import {
-  
-  DatePickerDialog
-} from '../styledComponents/CommonStyledComponents';
+import { DatePickerDialog } from '../styledComponents/CommonStyledComponents';
+import { DEFAULT_DATE } from '../../utils/Constants.js';
 
 import SessionDatePicker from '../SessionDatePicker/SessionDatePicker';
 
@@ -27,7 +25,7 @@ export default function SelectDateDialog() {
   const [open, setOpen] = useState(false);
   
   //usestate to maintain state of the selected date
-  const [selectedDate, setSelectedDate] = useState('2023-06-02')
+  const [selectedDate, setSelectedDate] = useState(DEFAULT_DATE);
   
   const theme = useTheme();
   const navigate = useNavigate();

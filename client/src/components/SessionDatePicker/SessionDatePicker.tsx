@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import dayjs, {Dayjs} from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
+import { DEFAULT_DATE } from '../../utils/Constants.js';
 /*
 Customized DatePicker MUI component which selects a date and return the selected date in the required 
 format using the callback function : handleDate
@@ -12,7 +13,7 @@ import { StaticDatePicker } from '@mui/x-date-pickers/StaticDatePicker';
 export default function SessionDatePicker({ handleDate }) {
 
   //TO maintain the state of the current date based on the date selected 
-  const [currDate, setCurrDate] = useState<Dayjs | any>(dayjs('2023-06-02'));
+  const [currDate, setCurrDate] = useState<Dayjs | any>(dayjs(DEFAULT_DATE));
   
   //Side effect to trigger the callback based on the currDate changes It also changes the format into the required format
   useEffect(() => {

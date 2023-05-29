@@ -36,8 +36,10 @@ export default function SessionGroupOptions({ groups, callback}) {
           value={group}
           label="Group"
           onChange={handleChange}
-        >{
-            groups.map((group, idx) => <MenuItem key={ idx}  value={group}>{group}</MenuItem>)
+        >{ groups.length>0 && <MenuItem key={0} value="All">All</MenuItem>}
+          {
+            
+            groups.map((group, idx) => <MenuItem key={idx+1} value={group}>{group}</MenuItem>)
           }
           
         </Select>

@@ -8,6 +8,7 @@ import axios from "axios";
 
 import NewsCard from "../../components/newsCard/NewsCard";
 import { StyledLink, HorizontalSeparater } from '../../components/styledComponents/CommonStyledComponents';
+import { PUBLIC_URL } from '../../utils/Constants.js';
 
 interface ArticleType{
   id: number;
@@ -22,14 +23,14 @@ const NewsOverview = () => {
   
   //logic to load artiles on initial render and set it to setArticles
   useEffect(() => {
-    axios.get("http://localhost:3001/news/").then(res => {
+    axios.get(`${PUBLIC_URL}/news/`).then(res => {
       setArticles(() => res.data);
     })
   }, [])
   
   return (
     <div>
-      <h3>Add New Article</h3>
+      <h3>New Overview</h3>
       <HorizontalSeparater />
       <StyledLink to={`/`}>Home</StyledLink>
       <StyledLink to={`/createNews`}>Create new Post</StyledLink>

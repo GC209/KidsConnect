@@ -8,6 +8,7 @@ import {
   Paragraph1,
 } from './components/styledComponents/CommonStyledComponents';
 import SelectDateDialog from './components/selectDateDialog/SelectDateDialog';
+import { DEFAULT_DATE } from './utils/Constants.js';
 import './App.css';
 
 
@@ -15,6 +16,9 @@ function App() {
   return (
     <>
       <h2>Home</h2>
+      <HorizontalSeparater />
+        <StyledLink to={`/session/${DEFAULT_DATE}`}>Sessions</StyledLink>
+        <StyledLink to={`/news`}>News</StyledLink>
       <HorizontalSeparater />
       <div className='tileContainer'>
         <div className='tile'>

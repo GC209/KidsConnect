@@ -14,6 +14,7 @@ import { getRequestedDay } from "../../utils/getRequestedDay";
 import SessionGroupOptions from "../../components/sessionGroupOptions/SessionGroupOptions";
 import SessionCard from "../../components/sessionCard/SessionCard";
 import { StyledLink, HorizontalSeparater } from '../../components/styledComponents/CommonStyledComponents';
+import { PUBLIC_URL } from '../../utils/Constants.js';
 
 interface group{
   id: number;
@@ -34,7 +35,6 @@ interface session{
 
 const SessionOverview = (): React.JSX.Element => {
   const params = useParams();
-  //console.log(params.sessionDate);
   
   //state to maintain the current selected datw
   const [currentDate, setCurrentDate] = useState<string| undefined>(params.sessionDate);
@@ -52,7 +52,7 @@ const SessionOverview = (): React.JSX.Element => {
   
   //Side effect that runs on initial render and on any date change to fetch the sessions for a specific day
   useEffect(() => {
-    axios.get(`http://localhost:3001/sessions?day=${currentDate}`).then(res => {
+    axios.get(`${PUBLIC_URL}/sessions?day=${currentDate}`).then(res => {
       setSessions(res.data);
     });
   }, [currentDate])
@@ -96,7 +96,8 @@ const SessionOverview = (): React.JSX.Element => {
       {uniqueGroups.length > 0 && <HorizontalSeparater />}
       {!sessions.length && <h3>Sorry, no sessions available on the selected date</h3>}
       {!filteredGroup && sessions && sessions.map(session => <SessionCard key={session.id} session={session} />)}
-      {filteredGroup && sessions && sessions.map(session => (session.group.name) === filteredGroup && <SessionCard key={session.id} session={session} />)}
+      {filteredGroup=="All" && sessions.map(session => <SessionCard key={session.id} session={session} />)}
+      {filteredGroup && sessions && filteredGroup!="All" && sessions.map(session => (session.group.name) === filteredGroup && <SessionCard key={session.id} session={session} />)}
       
     </>
   )

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { StyledLink, HorizontalSeparater } from '../../components/styledComponents/CommonStyledComponents';
+import { PUBLIC_URL } from '../../utils/Constants.js';
 import './styles.css';
 
 export default function NewsForm() {
@@ -16,10 +17,9 @@ export default function NewsForm() {
 
   /*Logic to post the form details to the db.json*/
   const submitData = (data) => {
-    axios.post('http://localhost:3001/news/', data)
-  .then(function (response) {
-    console.log(response);
-     navigate('/news');
+    axios.post(`${PUBLIC_URL}/news/`, data)
+  .then(function () {
+    navigate('/news');
   })
   .catch(function (error) {
     console.log(error);
@@ -30,7 +30,7 @@ export default function NewsForm() {
       <h3>Create news article</h3>
       <HorizontalSeparater />
       <StyledLink to={`/`}>Home</StyledLink>
-      <StyledLink to={`/news`}>News Overview</StyledLink>
+      <StyledLink to={`/news`}>News</StyledLink>
       <HorizontalSeparater />
       
       <div className="form-container">
